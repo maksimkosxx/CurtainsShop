@@ -1,0 +1,43 @@
+.header {
+  padding: 4vh 0 40px;
+  overflow: hidden;
+  &-logo {
+    @include make-lg-column(6);
+    @include make-sm-column(6);
+    @include make-xs-column(12);
+    &__image {
+      display: block;
+      width: 70%;
+      max-width: 230px;
+      height: 55px;
+      padding: 43px 0 0 40px;
+      box-sizing: border-box;
+      background: url(/images/logo/logo.png) left center no-repeat;
+      @include respond-to(handhelds) {
+        width: 100%;
+        margin: 0 auto;
+      }
+    }
+    &__text {
+      display: block;
+      @include font-face($font-proxima-regular, $font-size-base - 4px, 12px, #797979);
+    }
+  }
+  &-phone {
+    @include make-lg-column(6);
+    @include make-sm-column(6);
+    @include make-xs-column(12);
+    text-align: right;
+    &__text {
+      @include font-face($font-family-base, $font-size-base - 2px, $line-height-medium, $black);
+    }
+    &__number {
+      display: block;
+      @include font-face($font-family-base, $font-size-base + 8px, $line-height-medium, #4cb11e);
+    }
+    @include respond-to(handhelds) {
+      margin-top: 30px;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,41 @@
+//Файлы должны быть импортированы в соответствии с папкой размещения,
+// один за другим, в соответствуещем порядке:
+//
+//vendors/
+//utils/
+//base/
+//components/
+//layout/
+//pages/
+//themes/
+//
+//
+//один @import на строку;
+//не вставлять новые строки между файлами из одной папки;
+//новая строка после вставки последнего @import из одной и той же папки;
+//не писать расширения файлов и нижние подчеркивания.
+//
+//
+//@import 'vendors/bootstrap';
+//@import 'vendors/jquery-ui';
+//@import 'utils/variables';
+//@import 'utils/functions';
+//@import 'utils/mixins';
+//@import 'utils/placeholders';
+//
+
+
+@import 'vendors/bootstrap';
+
+@import 'utils/variables',
+        'utils/mixins',
+        'utils/placeholders';
+
+@import 'base/reset',
+        'base/typography',
+        'base/base';
+
+
+@import 'layout/header',
+        'layout/forms';
+

@@ -1,0 +1,19 @@
+.footer {
+  text-align: center;
+  padding: 40px 0;
+  &-contacts {
+    &__text {
+      color: #656565;
+      @include respond-to(handhelds) {
+        font-size: 14px;
+      }
+    }
+    &__phone {
+      margin: 15px 0;
+      @include font-face($font-family-semi-bold, $font-size-large, $line-height-large, $black);
+      @include respond-to(handhelds) {
+        font-size: 30px;
+      }
+    }
+  }
+}

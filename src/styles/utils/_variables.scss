@@ -1,0 +1,32 @@
+//глобальные переменные
+
+// fonts variables
+
+$font-family-base: PFBeauSansProRegular, sans-serif;
+$font-family-bold: PFBeauSansProBold, sans-serif;
+$font-family-semi-bold: PFBeauSansProSemiBold, sans-serif;
+$font-family-light: PFBeauSansProLight, sans-serif;
+$font-family-thin: PFBeauSansProThin, sans-serif;
+$font-proxima-regular: ProximaNovaRegular, sans-serif;
+
+
+$font-size-base: 16px !default;
+$font-size-medium: $font-size-base * 1.13; //18px
+$font-size-large: $font-size-base * 2.38;  //38px
+
+$line-height-base: normal !default;
+$line-height-medium: 24px;
+$line-height-large: 40px;
+
+// fonts variables END
+
+
+// colors variables
+
+$black: #000000 !default;
+$green: #4cae6d;
+$yellow: #ffe50a;
+$grey: #ebedf0;
+$btn-red: #c00e0e;
+
+// colors variables END

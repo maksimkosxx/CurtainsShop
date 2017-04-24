@@ -1,0 +1,95 @@
+
+// fonts mixin
+
+@mixin font-face($family, $size, $height, $color) {
+  font: $size $family;
+  line-height: $height;
+  color: $color;
+}
+
+// fonts mixin END
+
+
+// links mixin
+
+@mixin links($link, $focus, $hover, $active) {
+
+  transition: all 0.2s linear;
+  text-decoration: underline;
+  color: $link;
+
+  &:focus {
+    color: $focus;
+  }
+  &:hover {
+    color: $hover;
+    text-decoration: none;
+  }
+  &:active {
+    color: $active;
+  }
+}
+
+// links mixin END
+
+// button mixin
+
+@mixin button($width, $height, $radius, $background, $color, $family, $font, $line-height) {
+  width: $width;
+  min-height: $height;
+  border-radius: $radius;
+  border: none;
+  border-bottom: 5px solid darken($background, 10%);
+  outline: none;
+  background: $background;
+  color: $color;
+  font: $font $family;
+  line-height: $line-height;
+  cursor: pointer;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  letter-spacing: 1px;
+  transition: all 0.2s linear;
+  &:hover {
+    background: darken($background, 5%);
+    color: #ffffff;
+  }
+  &:active {
+    background: darken($background, 10%);
+    color: #ffffff;
+  }
+}
+
+
+// button mixin END
+
+
+
+// responsive mixin
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (min-width: 320px) and (max-width: 767px) {
+      @content;
+    }
+  } @else if $media == handhelds + tablets {
+    @media only screen and (min-width: 320px) and (max-width: 1024px) {
+      @content;
+    }
+  } @else if $media == tablets {
+    @media only screen and (min-width: 768px) and (max-width: 1024px) {
+      @content;
+    }
+  } @else if $media == laptop {
+    @media only screen and (min-width: 1001px) and (max-width: 1200px) {
+      @content;
+    }
+  }
+  @else if $media == tablets + laptop {
+    @media only screen and (min-width: 768px) and (max-width: 1200px) {
+      @content;
+    }
+  }
+}
+
+// responsive mixin END
