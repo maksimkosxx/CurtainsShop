@@ -6,23 +6,31 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-
         sass: {
             dev: {
                 options: {
                     style: 'expanded',
-                    compass: true
+                    compass: true,
+                    sourcemap: 'none'
+
                 },
-                files: {
-                    'src/styles/main.scss': 'main.css'
-                }
+                files: [{
+                    expand: true,
+                    cwd: 'src/styles',
+                    src: ['*.scss'],
+                    dest: 'src/styles',
+                    ext: '.css'
+                }]
             },
             prod: {
                 options: {
                     style: 'compressed',
-                    compass: true
+                    compass: true,
+                    sourcemap: 'none'
+
                 },
                 files: [{
+                    expand: true,
                     cwd: 'src/styles',
                     src: ['*.scss'],
                     dest: 'dist/styles',
@@ -30,43 +38,33 @@ module.exports = function (grunt) {
                 }]
             }
         },
-
         autoprefixer: {
-            dist: {
-                files: {
-                    'src/styles/*.css': 'main.css'
-                }
+            options: {
+                browsers: ["last 2 versions"]
+            },
+            files: {
+                "src/styles/main.css": ["src/styles/main.css"]
             }
         },
         concat: {
-            options: {
-                separator: ';'
-            },
-            libs: {
-                src: 'src/libs/main/*.js',
-                dest: 'dist/libs.min.js'
-            },
-            main: {
-                src: [
-                    'src/scripts/main/*.js'
-                ],
+            dev: {
+                src: ['src/scripts/main/*.js'],
                 dest: 'src/scripts/main.js'
+            },
+            prod: {
+                src: ['src/libs/main/*.js'],
+                dest: 'src/libs/libs.js'
             }
         },
         uglify: {
-            build: {
-                src: 'src/scripts/main.js',
+            main: {
+                src: ['src/scripts/*.js'],
                 dest: 'dist/scripts/main.min.js'
-            }
-        },
-        jshint: {
-            options: {
-                reporter: require('jshint-stylish')
             },
-
-            main: [
-                'src/scripts/**/*.js'
-            ]
+            libs: {
+                src: ['src/libs/*.js'],
+                dest: 'dist/libs/libs.min.js'
+            }
         },
         imagemin: {
             dynamic: {
@@ -79,38 +77,16 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            options: {
-                // spawn: false,
-                // livereload: true
+            sass: {
+                files: 'src/styles/**/*.scss',
+                tasks: ['sass:dev', 'autoprefixer']
             },
             scripts: {
-                files: [
-                    'src/scripts/**/*.js'
-                ],
-                tasks: [
-                    'concat',
-                    'jshint'
-                ]
-            },
-            styles: {
-                files: [
-                    'src/styles/**/**/*.scss'
-                ],
-                tasks: [
-                    'sass:dev'
-                ]
-            },
-            html: {
-                files: [
-                    'src/*.html'
-                ]
-            }
-        },
-        clean: {
-            build: {
-                src: ['dist/**/*']
+                files: ['src/scripts/main/*.js', 'src/libs/main/*.js'],
+                tasks: ['concat']
             }
         }
+
 
     });
     // copy: {
@@ -129,13 +105,23 @@ module.exports = function (grunt) {
     // },
 
     // 3. Тут мы указываем Grunt, что хотим использовать этот плагин
-    require('load-grunt-config')(grunt);
+
+    grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 
     // 4. Указываем, какие задачи выполняются, когда мы вводим «grunt» в терминале
 
 
-    grunt.registerTask('default', ['sass:prod', 'autoprefixer', 'concat', 'uglify', 'jshint', 'imagemin']);
+    grunt.registerTask('dev', ['watch', 'sass:dev', 'concat']);
+
+
+    grunt.registerTask('default', ['sass:prod', 'concat', 'uglify', 'imagemin']);
 
 
 };

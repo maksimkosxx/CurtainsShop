@@ -1,0 +1,6 @@
+Для использования sass:
+ 1. Установить ruby,
+ 2. gem install sass,
+ 3. gem install compass,
+ 4. grunt-contrib-sass,
+ 5. grunt-contrib-compass.
